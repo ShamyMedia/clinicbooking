@@ -8,6 +8,7 @@
   <meta name="description" content="عيادة الشامي: رعاية طبية متكاملة مع نخبة من الأطباء. احجز موعدك الآن عبر الإنترنت بسهولة وأمان.">
   <meta name="keywords" content="عيادة, حجز موعد, طبيب, عيادة الشامي, القاهرة, جراحة, نساء وتوليد, باطنية">
   
+  <!-- تم إزالة المسافات الزائدة من نهاية الروابط -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
@@ -129,24 +130,20 @@
           <div class="contact-info-card">
             <div class="contact-info-item">
               <i class="fas fa-map-marker-alt"></i>
-              <!-- ❗ استبدل هذا بعنوان العيادة الفعلي -->
-              <span>[اكتب عنوان العيادة هنا]، القاهرة، مصر</span>
+              <span>برج النصر, 446 ش فيصل، القاهرة، مصر</span>
             </div>
             <div class="contact-info-item">
               <i class="fas fa-phone"></i>
-              <!-- تم تحديث الرقم -->
               <a href="tel:+201006404614" class="text-decoration-none text-dark">01006404614</a>
             </div>
             <div class="contact-info-item">
               <i class="fas fa-envelope"></i>
-              <!-- ❗ استبدل هذا بالبريد الإلكتروني الفعلي -->
-              <a href="mailto:info@shamy-clinic.com" class="text-decoration-none text-dark">[اكتب البريد الإلكتروني هنا]</a>
+              <a href="mailto:info@shamy-clinic.com" class="text-decoration-none text-dark">shamymedia@gmail.com</a>
             </div>
             <hr class="my-4">
             <h5 class="mb-3">تابعنا على:</h5>
             <div class="social-icons">
               <a href="#"><i class="fab fa-instagram"></i></a>
-              <!-- تم تحديث رابط الواتساب -->
               <a href="https://wa.me/201006404614"><i class="fab fa-whatsapp"></i></a>
               <a href="#"><i class="fab fa-facebook"></i></a>
             </div>
@@ -154,8 +151,7 @@
         </div>
         <div class="col-lg-6">
           <div class="ratio ratio-16x9" style="border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-            <!-- ❗ استبدل "src" برابط الخريطة الفعلي من جوجل -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.731773099955!2d31.23344931511525!3d30.04441998188235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840c66e2978f9%3A0x803a681c6e14a821!2sTahrir%20Square!5e0!3m2!1sen!2seg!4v1633026366810!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4053.110004188214!2d31.195507575552554!3d30.013462674939177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145846edbfabd573%3A0xf1694f2f21218509!2sDr.%20Abdelaziz%20Moussa%20-%20Alshomoukh%20Dentistry!5e1!3m2!1sen!2seg!4v1762983722731!5m2!1sen!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -166,13 +162,13 @@
     <p>© 2025 عيادة الشامي. تصميم وبرمجة شامي ميديا.</p>
   </footer>
 
+  <!-- تم إزالة المسافات الزائدة من نهاية الرابط -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // --- JavaScript Logic (النسخة النهائية والمتقدمة) ---
     const SECRET_KEY = 'my_super_secret_key_123';
-    // ======== تم تحديث رابط السكريبت ========
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyEWNokXOzUe2FSpZmXhxWIeUnCUgrxnOtQTXTEXM3st6xRooIvVrA2AVbkOV268YGG/exec';
-    // ======== تم تحديث رقم الواتساب ========
+    // ======== تم تحديث رابط السكريبت بالبيانات التي قدمتها ========
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxNcBEL7L0UjmB7-K-xVScqQa4DNpK2jZ8z1ye8sHZLi8vxWGFtwUJWJgBWMg5fOsQVVw/exec';
+    // ======== تم تحديث رقم الواتساب بالبيانات التي قدمتها ========
     const CLINIC_WHATSAPP_NUMBER = '201006404614';
 
     const bookingForm = document.getElementById('bookingForm');
@@ -182,10 +178,8 @@
     const timeSelect = document.getElementById('time');
 
     function populateTimeSlots() {
-      const openingHour = 9;
-      const closingHour = 21;
-      const interval = 15;
-      timeSelect.innerHTML = '<option value="" selected disabled>-- اختر الوقت --</option>'; // إعادة تعيين القائمة
+      const openingHour = 9; const closingHour = 21; const interval = 15;
+      timeSelect.innerHTML = '<option value="" selected disabled>-- اختر الوقت --</option>';
       for (let hour = openingHour; hour < closingHour; hour++) {
         for (let minute = 0; minute < 60; minute += interval) {
           const formattedHour = hour.toString().padStart(2, '0');
