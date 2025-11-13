@@ -167,7 +167,7 @@
   <script>
     const SECRET_KEY = 'my_super_secret_key_123';
     // ======== تم تحديث رابط السكريبت بالبيانات التي قدمتها ========
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxBzWtA2hIjWBZ3QMK6mrneiOOqClLPnKrOEykbtZnnTJHsvuXPckeCE4rfrOfnhKEF2Q/exec';
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyWC-KAAVPonzsb0p-aHkhLSVNA6sy6fyPidL-3IYfT1tP2F0TUqJulMaKBfpvHtpOaVg/exec';
     // ======== تم تحديث رقم الواتساب بالبيانات التي قدمتها ========
     const CLINIC_WHATSAPP_NUMBER = '201006404614';
 
@@ -219,11 +219,12 @@
         };
 
         try {
-            const response = await fetch(WEB_APP_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+           const response = await fetch(WEB_APP_URL, {
+    method: 'POST',
+    // --- التغيير الوحيد هنا ---
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+    body: JSON.stringify(formData)
+});
             const result = await response.json();
             if (result.status === 'success') {
                 handleSuccess(formData);
