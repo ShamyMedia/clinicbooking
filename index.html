@@ -241,24 +241,32 @@
     });
 
     function handleSuccess(formData) {
-        showMessage('تم تأكيد حجزك بنجاح! سيتم الآن فتح واتساب لمتابعة التفاصيل.', 'success');
-        bookingForm.reset();
-        bookingForm.classList.remove('was-validated');
-        dateInput.min = new Date().toISOString().split('T')[0];
+    // 1. عرض رسالة نجاح واضحة
+    showMessage('تم تأكيد حجزك بنجاح! سيتم الآن فتح واتساب لمتابعة التفاصيل.', 'success');
+    
+    // 2. إعادة تعيين النموذج
+    bookingForm.reset();
+    bookingForm.classList.remove('was-validated');
+    dateInput.min = new Date().toISOString().split('T')[0];
+    // إعادة ملء قائمة الوقت إذا كنت تستخدمها
+    if (typeof populateTimeSlots === 'function') {
         populateTimeSlots();
-
-        const doctorSelect = document.getElementById('doctor');
-        const doctorText = doctorSelect.options[doctorSelect.selectedIndex].text;
-        
-        const whatsappMessage = `مرحباً عيادة الشامي،\nلقد قمت بتأكيد حجز موعد باسم: ${formData.patientName}\nمع: ${doctorText}\nفي تاريخ: ${formData.date} الساعة: ${formData.time}.\nشكراً لكم.`;
-        const whatsappURL = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
-        
-        setTimeout(() => { window.open(whatsappURL, '_blank'); }, 2000);
     }
 
-    function handleError(message) {
-        showMessage(message, 'danger');
-    }
+    // 3. تكوين وفتح رابط واتساب (هذا هو الجزء المضاف)
+    const doctorSelect = document.getElementById('doctor');
+    const doctorText = doctorSelect.options[doctorSelect.selectedIndex].text;
+    
+    const whatsappMessage = `مرحباً عيادة الشامي،\nلقد قمت بتأكيد حجز موعد باسم: ${formData.patientName}\nمع: ${doctorText}\nفي تاريخ: ${formData.date} الساعة: ${formData.time}.\nشكراً لكم.`;
+    
+    // تأكد من أن متغير CLINIC_WHATSAPP_NUMBER معرف بشكل صحيح في بداية السكريبت
+    const whatsappURL = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // فتح الرابط بعد ثانيتين لإعطاء المستخدم فرصة لقراءة الرسالة
+    setTimeout(() => {
+        window.open(whatsappURL, '_blank');
+    }, 2000);
+}
 
     function showMessage(message, type) {
         const alertType = type === 'success' ? 'alert-success' : 'alert-danger';
