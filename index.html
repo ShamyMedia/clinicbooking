@@ -239,47 +239,32 @@
         }
     });
 
- function handleSuccess(formData) {
-        const doctorSelect = document.getElementById('doctor');
-        const doctorText = doctorSelect.options[doctorSelect.selectedIndex].text;
-        
-        const whatsappMessage = `مرحباً عيادة الشامي،\nلقد قمت بتأكيد حجز موعد باسم: ${formData.patientName}\nمع: ${doctorText}\nفي تاريخ: ${formData.date} الساعة: ${formData.time}.\nشكراً لكم.`;
-        
-        const whatsappURL = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
-
-        // الحل: عرض رسالة تحتوي على زر للذهاب للواتساب (أضمن طريقة لتجنب الحظر)
-        // وأيضاً سنحاول التوجيه التلقائي
-        
-        const successHtml = `
-            <div class="alert alert-success text-center" role="alert">
-                <h4 class="alert-heading">تم الحجز بنجاح!</h4>
-                <p>سيتم تحويلك الآن إلى واتساب لإرسال تفاصيل الحجز.</p>
-                <hr>
-                <p class="mb-0">إذا لم يفتح التطبيق تلقائياً، اضغط على الزر أدناه:</p>
-                <a href="${whatsappURL}" class="btn btn-success mt-2">
-                    <i class="fab fa-whatsapp"></i> تأكيد عبر واتساب
-                </a>
-            </div>
-        `;
-
-        messageArea.innerHTML = successHtml;
-        
-        // إعادة تعيين النموذج
-        bookingForm.reset();
-        bookingForm.classList.remove('was-validated');
-        dateInput.min = new Date().toISOString().split('T')[0];
-        if (typeof populateTimeSlots === 'function') {
-            populateTimeSlots();
-        }
-
-        // محاولة التوجيه التلقائي بعد ثانية واحدة (لإعطاء المستخدم فرصة لقراءة الرسالة)
-        setTimeout(() => {
-            window.location.href = whatsappURL;
-        }, 1500);
+    function handleSuccess(formData) {
+    // 1. عرض رسالة نجاح واضحة
+    showMessage('تم تأكيد حجزك بنجاح! سيتم الآن فتح واتساب لمتابعة التفاصيل.', 'success');
+    
+    // 2. تكوين وفتح رابط واتساب (تم التأكد من الفتح الفوري لتجنب حظر النوافذ المنبثقة)
+    const doctorSelect = document.getElementById('doctor');
+    const doctorText = doctorSelect.options[doctorSelect.selectedIndex].text;
+    
+    const whatsappMessage = `مرحباً عيادة الشامي،\nلقد قمت بتأكيد حجز موعد باسم: ${formData.patientName}\nمع: ${doctorText}\nفي تاريخ: ${formData.date} الساعة: ${formData.time}.\nشكراً لكم.`;
+    
+    // فتح الرابط فوراً باستخدام wa.me لضمان التوافق
+    const whatsappURL = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, '_blank');
+    
+    // 3. إعادة تعيين النموذج
+    bookingForm.reset();
+    bookingForm.classList.remove('was-validated');
+    dateInput.min = new Date().toISOString().split('T')[0];
+    if (typeof populateTimeSlots === 'function') {
+        populateTimeSlots();
     }
+   }
 
-    function handleError(message) { // قمت بتسميتها handleError لتتوافق مع الكود الخاص بك
-         messageArea.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    function showMessage(message, type) {
+        const alertType = type === 'success' ? 'alert-success' : 'alert-danger';
+        messageArea.innerHTML = `<div class="alert ${alertType} alert-dismissible fade show" role="alert">
                                     ${message}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>`;
